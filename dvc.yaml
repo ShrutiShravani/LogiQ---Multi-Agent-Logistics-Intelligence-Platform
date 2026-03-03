@@ -1,0 +1,26 @@
+stages:
+  validation:
+    cmd: python src/data_pipeline/data_validation.py
+    deps: 
+     -  data/raw/train.csv
+  transform:
+    cmd: python src/data_pipeline/data_preprocessing.py
+    deps:
+      - data/raw/train.csv
+      
+    outs:
+      - data/transformed/train_final.csv
+  
+  train:
+    cmd: python src/models/train_model.py
+    deps:
+      - data/transformed/train_final.csv
+      - src/models/model_training.py
+    params:
+      - train.learning_rate
+      - train.max_depth
+    outs:
+      - models/pricing_xgb_model.json
+    metrics:
+      - reports/metrics.json:
+          cache: false

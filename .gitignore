@@ -1,0 +1,29 @@
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Conda environments
+conda-env/
+
+# API Keys and Secrets
+.env
+*.log
+
+# IDE specific
+.vscode/
+.idea/
+
+data/raw/
+data/transformed/
+data/processed/
+
+
+# Model binaries
+models/*.json
+models/*.pkl
+models/*.onnx
+
+# MLflow local database and artifacts
+mlruns/
+mlflow.db

@@ -1,0 +1,55 @@
+# Core Framework
+langchain
+langchain-openai
+langgraph
+langsmith
+
+# Data Processing
+pandas
+numpy
+pydantic
+pydantic-settings
+python-dotenv
+
+# Database & Cache
+psycopg2-binary
+redis
+sqlalchemy
+
+# Optimization & Routing
+ortools
+geopy
+osmnx
+networkx
+
+# Machine Learning
+scikit-learn
+xgboost
+mlflow
+
+# Document Processing
+pypdf2
+pytesseract
+pillow
+pdf2image
+
+# API & Web
+fastapi
+uvicorn
+httpx
+requests
+
+# Dashboard
+streamlit
+plotly
+folium
+
+# Utilities
+tqdm
+pyyaml
+python-json-logger
+uuid
+
+# Testing
+pytest
+pytest-cov
