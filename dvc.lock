@@ -1,0 +1,45 @@
+schema: '2.0'
+stages:
+  validation:
+    cmd: python src/data_pipeline/data_validation.py
+    deps:
+    - path: data/raw/train.csv
+      hash: md5
+      md5: e59c291a4b1c640f1dab33b89daa22e1
+      size: 200589097
+  transform:
+    cmd: python src/data_pipeline/data_preprocessing.py
+    deps:
+    - path: data/raw/train.csv
+      hash: md5
+      md5: e59c291a4b1c640f1dab33b89daa22e1
+      size: 200589097
+    outs:
+    - path: data/transformed/train_final.csv
+      hash: md5
+      md5: 7650db0b9c6ef93581a3e806ca06433e
+      size: 199086478
+  train:
+    cmd: python src/models/model_training.py
+    deps:
+    - path: data/transformed/train_final.csv
+      hash: md5
+      md5: 7650db0b9c6ef93581a3e806ca06433e
+      size: 199086478
+    - path: src/models/model_training.py
+      hash: md5
+      md5: c9fae00d893f3424648c0e22a08469dd
+      size: 3686
+    params:
+      params.yaml:
+        train.learning_rate: 0.03
+        train.max_depth: 8
+    outs:
+    - path: models/pricing_xgb_model.json
+      hash: md5
+      md5: 43f489fc07614d4706f5bbcfc769b7bb
+      size: 27663985
+    - path: reports/metrics.json
+      hash: md5
+      md5: ca75490ae6bb4732ccd792af3602e609
+      size: 81
