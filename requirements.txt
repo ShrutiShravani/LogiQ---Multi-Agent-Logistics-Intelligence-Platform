@@ -53,3 +53,5 @@ uuid
 # Testing
 pytest
 pytest-cov
+holidays
+geopy

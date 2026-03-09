@@ -7,12 +7,13 @@ stages:
     cmd: python src/data_pipeline/data_preprocessing.py
     deps:
       - data/raw/train.csv
+      - src/data_pipeline/data_preprocessing.py
       
     outs:
       - data/transformed/train_final.csv
   
   train:
-    cmd: python src/models/train_model.py
+    cmd: python src/models/model_training.py
     deps:
       - data/transformed/train_final.csv
       - src/models/model_training.py

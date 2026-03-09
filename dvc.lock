@@ -14,22 +14,26 @@ stages:
       hash: md5
       md5: e59c291a4b1c640f1dab33b89daa22e1
       size: 200589097
+    - path: src/data_pipeline/data_preprocessing.py
+      hash: md5
+      md5: f476f186f05ac841739777615b52b5f2
+      size: 6823
     outs:
     - path: data/transformed/train_final.csv
       hash: md5
-      md5: 7650db0b9c6ef93581a3e806ca06433e
-      size: 199086478
+      md5: f216c3e28b80efe5b36bc92c2bbcf746
+      size: 232550193
   train:
     cmd: python src/models/model_training.py
     deps:
     - path: data/transformed/train_final.csv
       hash: md5
-      md5: 7650db0b9c6ef93581a3e806ca06433e
-      size: 199086478
+      md5: f216c3e28b80efe5b36bc92c2bbcf746
+      size: 232550193
     - path: src/models/model_training.py
       hash: md5
-      md5: c9fae00d893f3424648c0e22a08469dd
-      size: 3686
+      md5: 97185b92e02a73500ac0b9e694161841
+      size: 4225
     params:
       params.yaml:
         train.learning_rate: 0.03
@@ -37,9 +41,9 @@ stages:
     outs:
     - path: models/pricing_xgb_model.json
       hash: md5
-      md5: 43f489fc07614d4706f5bbcfc769b7bb
-      size: 27663985
+      md5: 6bd0d2e4420c56cf5ed02b4a45584266
+      size: 29620987
     - path: reports/metrics.json
       hash: md5
-      md5: ca75490ae6bb4732ccd792af3602e609
+      md5: 59e065a4b8821db4f06589683d9ad429
       size: 81

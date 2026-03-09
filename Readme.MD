@@ -47,7 +47,7 @@ A team of **5 specialized AI agents** that collaborate to solve logistics proble
 | **Pricing Engine** | Chain | Dynamic pricing, demand forecasting, margin optimization | XGBoost, RL |
 | **Critic** | Reflection | Cross-validation, consistency checks, feedback loops | Custom rules |
 
----
+---LogiQ: A Multi-Agent Platform for Autonomous Logistics Orchestration using Actor-Critic Validation to optimize Pricing Accuracy and Route Feasibility
 
 ## 🏗️ System Architecture
 ─────────────────────────────────────────────────────────────────┐

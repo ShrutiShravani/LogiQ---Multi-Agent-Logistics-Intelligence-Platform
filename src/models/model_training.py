@@ -8,9 +8,14 @@ import mlflow.xgboost
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import json
+import yaml
+from mlflow.tracking import MlflowClient
 
 def model_train():
     # 1. Setup MLflow Experiment
+    with open("params.yaml") as f:
+        params_yaml=yaml.safe_load(f)
+
     mlflow.set_experiment("NYC_Logistics_Pricing")
     
     with mlflow.start_run():
@@ -40,10 +45,10 @@ def model_train():
         
        
         # 3. Switching to REGRESSOR (Since we are predicting Price)
-        params = {
-            "n_estimators": 1200,
-            "max_depth": 8,
-            "learning_rate": 0.03,
+        xgb_params = {
+            "n_estimators": params_yaml['train']['n_estimators'],
+            "max_depth":params_yaml['train']['max_depth'],
+            "learning_rate": params_yaml['train']['learning_rate'],
             "subsample": 0.9,
             "colsample_bytree": 0.9,
             "objective": "reg:squarederror",
@@ -51,7 +56,7 @@ def model_train():
             "random_state": 42
         }
         
-        model = xgb.XGBRegressor(**params)
+        model = xgb.XGBRegressor(**xgb_params)
 
         model.fit(
             X_train, y_train,
@@ -70,7 +75,7 @@ def model_train():
         r2 = r2_score(y_actual, y_pred)
 
         # 5. Corrected MLflow Logging (Fixed typos)
-        mlflow.log_params(params)
+        mlflow.log_params(xgb_params)
         mlflow.log_metric("mae", mae)
         mlflow.log_metric("rmse", rmse)
         mlflow.log_metric("r2_score", r2)
@@ -95,7 +100,15 @@ def model_train():
         os.makedirs("models", exist_ok=True)
         model.save_model("models/pricing_xgb_model.json")
         mlflow.xgboost.log_model(model,artifact_path="pricing_model")
-        
+
+        #register_model
+        model_uri = f"runs:/{mlflow.active_run().info.run_id}/pricing_model"
+        model_details = mlflow.register_model(model_uri=model_uri, name="xgboost_logistics_pricing")
+
+        # 3. Move it to "Production" (So the PricingAgent can find it)
+        client = MlflowClient()
+        client.set_registered_model_alias("xgboost_logistics_pricing", "Production", model_details.version)
+        print(f"Model version {model_details.version} is now LIVE in Production.")
         print("\nModel saved and logged to MLflow.")
 
     return model, X_val, y_val, y_pred
