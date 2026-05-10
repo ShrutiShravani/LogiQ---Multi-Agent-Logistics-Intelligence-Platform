@@ -1,10 +1,10 @@
 # 🚚 LogiQ — Multi-Agent Logistics Intelligence Platform
 
+
 **LogiQ** is a production-grade multi-agent AI system designed to automate complex logistics workflows. By bridging the gap between raw document ingestion and actionable operational intelligence, LogiQ transforms how courier companies handle data.
 
 > **Workflow:** Document Ingestion → Extraction → Validation → Route Mapping → Pricing → Critic.
 
----
 
 ## ❓ Why LogiQ?
 
@@ -146,30 +146,13 @@ LogiQ is built on a modular, enterprise-ready stack designed for scalability and
 - **Regression Testing:** Custom **E2E Regression Suite** (Validating model accuracy and system integrity against "Golden Dataset" waybills). 
 - **Type Safety:** **Pydantic V2** (Strict runtime schema enforcement and data validation).
 
-### 📂 Technical Deep Dive: Raw Audit Data
-For a granular look at the system's output and decision-making logic, refer to the generated audit logs:
 
-*   [View Full Shipment Audit (JSON)](assets\batch_full_audit.json) — *Shows the complete state transition from raw OCR to final price.*
-*   [View Validation Feedback Loop (JSON)](assets\batch_results.json) — *Demonstrates the recursive logic when the Validation Agent triggers a re-extraction.*
-
-> **Pro Tip:** These JSON files represent the "Final State" of the LangGraph, containing all telemetry, API responses, and Critic overrides.
-
-### 🔍 Full-Stack Traceability & Audit Trail
-LogiQ utilizes a "Glass Box" design, ensuring every agentic decision is logged and auditable.
-
-| LangGraph Execution Trace | MLflow Performance Logs |
-| :---: | :---: |
-| ![LangGraph Trace](assets\trcae_Document_extrcation_to_validation.png) | ![MLflow Metrics](assets\mlflow_log1.png),
-![MLflow Metrics](assets\mlflow_log1.png),![MLflow Metrics](assets\mlflow_log3.png)|
-
-*   **Traceability:** Every node transition and state change is captured for forensic debugging.
-*   **Performance Tracking:** MLflow monitors MAE, override rates, and batch efficiency in real-time.
 
 ---
 
 # 📑 Technical Report: Agentic Ops & Performance Analysis
 
-## 1. Observability & Real-Time Monitoring
+### 1. Observability & Real-Time Monitoring
 
 LogiQ treats observability as a mechanical necessity for reliability on consumer-grade hardware (**32GB RAM**), ensuring sub-second agent handoffs and consistent state management.
 
@@ -186,7 +169,7 @@ LogiQ treats observability as a mechanical necessity for reliability on consumer
 
 ---
 
-## 2. Model Accuracy & Financial Integrity
+### 2. Model Accuracy & Financial Integrity
 
 LogiQ utilizes a dual-engine approach (**XGBoost + Critic Agent**) to maintain financial accuracy across unseen data.
 
@@ -196,7 +179,7 @@ LogiQ utilizes a dual-engine approach (**XGBoost + Critic Agent**) to maintain f
 
 ---
 
-## 3. Node Performance Analysis (Benchmark: 20.92s)
+### 3. Node Performance Analysis (Benchmark: 20.92s)
 
 | Node | p95 Latency (s) | p99 Latency (s) | Token Load (Avg) | Role |
 
@@ -214,9 +197,28 @@ LogiQ utilizes a dual-engine approach (**XGBoost + Critic Agent**) to maintain f
 
 | **Validation Agent** | 0.0007s | 0.0007s | N/A | Anomaly Detection |
 
+### 4. 📂 Technical Deep Dive: Raw Audit Data
+For a granular look at the system's output and decision-making logic, refer to the generated audit logs:
+
+*   [View Full Shipment Audit (JSON)](assets\batch_full_audit.json) — *Shows the complete state transition from raw OCR to final price.*
+*   [View Validation Feedback Loop (JSON)](assets\batch_results.json) — *Demonstrates the recursive logic when the Validation Agent triggers a re-extraction.*
+
+> **Pro Tip:** These JSON files represent the "Final State" of the LangGraph, containing all telemetry, API responses, and Critic overrides.
+
+### 5. 🔍 Full-Stack Traceability & Audit Trail
+LogiQ utilizes a "Glass Box" design, ensuring every agentic decision is logged and auditable.
+
+| LangGraph Execution Trace | MLflow Performance Logs |
+| :---: | :---: |
+| ![LangGraph Trace](assets\trcae_Document_extrcation_to_validation.png) | ![MLflow Metrics](assets\mlflow_log1.png),
+![MLflow Metrics](assets\mlflow_log1.png),![MLflow Metrics](assets\mlflow_log3.png)|
+
+*   **Traceability:** Every node transition and state change is captured for forensic debugging.
+*   **Performance Tracking:** MLflow monitors MAE, override rates, and batch efficiency in real-time.
+
 ---
 
-## 4. Engineering Impact: Efficiency & Savings
+### 6. Engineering Impact: Efficiency & Savings
 
 The transition from individual shipment processing to an agentic spatio-temporal clustering model has yielded measurable ROI:
 
@@ -297,7 +299,7 @@ Follow these steps to deploy the LogiQ stack locally.
 
 ### ⚙️ Environment Setup
 
-Create a `.env` file in the root directory and configure the following variables:
+**Create a `.env` file in the root directory and configure the following variables:**
 
 # LLM & Tracing
 
@@ -309,21 +311,18 @@ LANGCHAIN_PROJECT="LogiQ-Intelligence-Platform"
 
 LANGCHAIN_TRACING_V2="true"
 
-LANGCHAIN_ENDPOINT="[[https://api.smith.langchain.com](https://api.smith.langchain.com)](https://api.smith.langchain.com](https://api.smith.langchain.com))"
-
-
-
 # External APIs
 
 MAPBOX_ACCESS_TOKEN=your_mapbox_token
 
 VISUAL_CROSSING_KEY=your_weather_key
 
+
 APP_USER_AGENT=LogiQ_Senior_Project_V2
 
 
+# Databases (Docker Internal)
 
-# Databases (Internal Docker Network)
 
 POSTGRES_USER=logiq_user
 
@@ -340,7 +339,6 @@ REDIS_HOST=redis
 REDIS_PORT=6379
 
 
-
 # Observability
 
 MLFLOW_TRACKING_URI=[http://mlflow_server:5000](http://mlflow_server:5000)
@@ -348,12 +346,10 @@ MLFLOW_TRACKING_URI=[http://mlflow_server:5000](http://mlflow_server:5000)
 MLFLOW_EXPERIMENT_NAME=Logistics_Pricing_Live
 
 
+MLFLOW_TRACKING_URI=http://mlflow_server:5000
 
 
-#### Start the full stack (API + Redis + MLflow+ POSTGRES_DB)
-
--  SET UP Docker Compose.YML WITH YOUR CREDENTIALS
-
+MLFLOW_EXPERIMENT_NAME=Logistics_Pricing_Live
 
 
 
@@ -365,7 +361,6 @@ cd logiq-agent-ops
 
 
 **Run pip install -r requirements.txt**
-
 
 
 
@@ -387,5 +382,5 @@ cd logiq-agent-ops
 > [!IMPORTANT] > **Workflow for API Mode:** > 1. First, upload all 10 shipments using the `process_waybill` endpoint. 
 
 > 2. Then, trigger the `optimization` endpoint to calculate and visualize the price difference between **Clustered** and **Singleton** shipments.
-```
+
 
