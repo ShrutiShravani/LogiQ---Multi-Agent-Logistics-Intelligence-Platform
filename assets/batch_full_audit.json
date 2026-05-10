@@ -1,0 +1,88 @@
+{
+    "LOGIQ-2026-STRESS-110": [
+        "DocumentAgent",
+        "[DocumentAgent Success] extracted LOGIQ-2026-STRESS-110",
+        "\n[RouteAgent Success]\n--- ENVIRONMENT ---\nContext: [H:10, Day:3, Rush:1, Holiday:0]\nSignals: [Traffic:0.95, Weather:Overcast]\n\n--- INDIVIDUAL VIEW (Customer Pricing) ---\nPayload: 5.65kg\nRoute:   [40.74637, -74.0016392] -> [40.7475831, -74.0023992]\nMetrics: 0.79km | 3.08min | Vehicle: e_scooter\n\n--- OPERATIONAL VIEW (Fleet Execution) ---\nCLUSTER_ID:Cluster_0\nPayload: 8.07kg (ClusterTotal)\nRoute:   [40.74637, -74.0016392] -> [40.7475279, -74.0012429]\nMetrics: 1.4384000000000001km | 3.03min | Vehicle: e_scooter\n\n",
+        "\n('[PricingAgent Success] ->best_route:Selected Route 0,final_price:11.289999961853027,weather_condition:Overcast,weather_factor:1.05', 'optimized_cost:16.81')\n",
+        "[CriticAgent]: Opertaionl_Price: $13.68 Overriding-> $16.81,duration_override[]"
+    ],
+    "LOGIQ-2026-STRESS-119": [
+        "DocumentAgent",
+        "[DocumentAgent Success] extracted LOGIQ-2026-STRESS-119",
+        "\n[RouteAgent Success]\n--- ENVIRONMENT ---\nContext: [H:15, Day:3, Rush:0, Holiday:0]\nSignals: [Traffic:0.95, Weather:Overcast]\n\n--- INDIVIDUAL VIEW (Customer Pricing) ---\nPayload: 1.06kg\nRoute:   [40.74637, -74.0016392] -> [40.7358955, -74.1725529]\nMetrics: 22.14km | 36.41min | Vehicle: van\n\n--- OPERATIONAL VIEW (Fleet Execution) ---\nCLUSTER_ID:SINGLETON\nPayload: 1.06kg (ClusterTotal)\nRoute:   [40.74637, -74.0016392] -> [40.7358955, -74.1725529]\nMetrics: 0km | 0min | Vehicle: 0\n\n",
+        "\n('[PricingAgent Success] ->best_route:Selected Route 1,final_price:74.66000366210938,weather_condition:Overcast,weather_factor:1.05', 'optimized_cost:0.0')\n",
+        "[CriticAgent]: Verified - No Overrides."
+    ],
+    "LOGIQ-2026-109": [
+        "DocumentAgent",
+        "[DocumentAgent Success] extracted LOGIQ-2026-109",
+        "\n[RouteAgent Success]\n--- ENVIRONMENT ---\nContext: [H:8, Day:6, Rush:1, Holiday:0]\nSignals: [Traffic:0.85, Weather:Rain]\n\n--- INDIVIDUAL VIEW (Customer Pricing) ---\nPayload: 0.63kg\nRoute:   [40.7392003, -73.97749] -> [40.7358955, -74.1725529]\nMetrics: 18.86km | 51.39min | Vehicle: van\n\n--- OPERATIONAL VIEW (Fleet Execution) ---\nCLUSTER_ID:SINGLETON\nPayload: 0.63kg (ClusterTotal)\nRoute:   [40.7392003, -73.97749] -> [40.7358955, -74.1725529]\nMetrics: 0km | 0min | Vehicle: 0\n\n",
+        "\n('[PricingAgent Success] ->best_route:Selected Route 0,final_price:123.41000366210938,weather_condition:Rain,weather_factor:1.2', 'optimized_cost:0.0')\n",
+        "[CriticAgent]: Verified - No Overrides."
+    ],
+    "LOGIQ-2026-STRESS-111": [
+        "DocumentAgent",
+        "[DocumentAgent Success] extracted LOGIQ-2026-STRESS-111",
+        "\n[RouteAgent Success]\n--- ENVIRONMENT ---\nContext: [H:10, Day:3, Rush:1, Holiday:0]\nSignals: [Traffic:0.95, Weather:Overcast]\n\n--- INDIVIDUAL VIEW (Customer Pricing) ---\nPayload: 0.22kg\nRoute:   [40.74637, -74.0016392] -> [40.7461994, -74.0011729]\nMetrics: 0.67km | 2.88min | Vehicle: bicycle\n\n--- OPERATIONAL VIEW (Fleet Execution) ---\nCLUSTER_ID:Cluster_0\nPayload: 8.07kg (ClusterTotal)\nRoute:   [40.74637, -74.0016392] -> [40.7475279, -74.0012429]\nMetrics: 0.0km | 0.0min | Vehicle: N/A\n\n",
+        "\n('[PricingAgent Success] ->best_route:Selected Route 0,final_price:6.510000228881836,weather_condition:Overcast,weather_factor:1.05', 'optimized_cost:0.0')\n",
+        "[CriticAgent]: Vehicle: bicycle -> e_scooter"
+    ],
+    "LOGIQ-2026-STRESS-112": [
+        "DocumentAgent",
+        "[DocumentAgent Success] extracted LOGIQ-2026-STRESS-112",
+        "\n[RouteAgent Success]\n--- ENVIRONMENT ---\nContext: [H:10, Day:3, Rush:1, Holiday:0]\nSignals: [Traffic:0.95, Weather:Overcast]\n\n--- INDIVIDUAL VIEW (Customer Pricing) ---\nPayload: 2.2kg\nRoute:   [40.74637, -74.0016392] -> [40.7475279, -74.0012429]\nMetrics: 0.88km | 3.47min | Vehicle: bicycle\n\n--- OPERATIONAL VIEW (Fleet Execution) ---\nCLUSTER_ID:Cluster_0\nPayload: 8.07kg (ClusterTotal)\nRoute:   [40.74637, -74.0016392] -> [40.7475279, -74.0012429]\nMetrics: 0.0km | 0.0min | Vehicle: N/A\n\n",
+        "\n('[PricingAgent Success] ->best_route:Selected Route 0,final_price:6.840000152587891,weather_condition:Overcast,weather_factor:1.05', 'optimized_cost:0.0')\n",
+        "[CriticAgent]: Vehicle: bicycle -> e_scooter"
+    ],
+    "LOGIQ-2026-STRESS-113": [
+        "DocumentAgent",
+        "[DocumentAgent Success] extracted LOGIQ-2026-STRESS-113",
+        "\n[RouteAgent Success]\n--- ENVIRONMENT ---\nContext: [H:10, Day:3, Rush:1, Holiday:0]\nSignals: [Traffic:0.95, Weather:Overcast]\n\n--- INDIVIDUAL VIEW (Customer Pricing) ---\nPayload: 14.27kg\nRoute:   [40.7392003, -73.97749] -> [40.7390312, -73.9791055]\nMetrics: 0.97km | 4.65min | Vehicle: e_scooter\n\n--- OPERATIONAL VIEW (Fleet Execution) ---\nCLUSTER_ID:Cluster_1\nPayload: 42.03kg (ClusterTotal)\nRoute:   [40.74637, -74.0016392] -> [40.7390312, -73.9791055]\nMetrics: 1.7398km | 3.66min | Vehicle: e_scooter\n\n",
+        "\n('[PricingAgent Success] ->best_route:Selected Route 0,final_price:12.65999984741211,weather_condition:Overcast,weather_factor:1.05', 'optimized_cost:22.6')\n",
+        "[CriticAgent]: Opertaionl_Price: $33.54 Overriding-> $22.6,duration_override[]"
+    ],
+    "LOGIQ-2026-STRESS-114": [
+        "DocumentAgent",
+        "[DocumentAgent Success] extracted LOGIQ-2026-STRESS-114",
+        "\n[RouteAgent Success]\n--- ENVIRONMENT ---\nContext: [H:10, Day:3, Rush:1, Holiday:0]\nSignals: [Traffic:0.95, Weather:Overcast]\n\n--- INDIVIDUAL VIEW (Customer Pricing) ---\nPayload: 9.4kg\nRoute:   [40.7392003, -73.97749] -> [40.7391793, -73.9785776]\nMetrics: 0.08km | 0.34min | Vehicle: bicycle\n\n--- OPERATIONAL VIEW (Fleet Execution) ---\nCLUSTER_ID:Cluster_1\nPayload: 42.03kg (ClusterTotal)\nRoute:   [40.74637, -74.0016392] -> [40.7390312, -73.9791055]\nMetrics: 0.0km | 0.0min | Vehicle: N/A\n\n",
+        "\n('[PricingAgent Success] ->best_route:Selected Route 0,final_price:9.539999961853027,weather_condition:Overcast,weather_factor:1.05', 'optimized_cost:0.0')\n",
+        "[CriticAgent]: Vehicle: bicycle -> e_scooter"
+    ],
+    "LOGIQ-2026-STRESS-115": [
+        "DocumentAgent",
+        "Math Warning: LLM total (16.56) != calculated sum (18.36)",
+        "[DocumentAgent Success] extracted LOGIQ-2026-STRESS-115",
+        "\n[RouteAgent Success]\n--- ENVIRONMENT ---\nContext: [H:10, Day:3, Rush:1, Holiday:0]\nSignals: [Traffic:0.95, Weather:Overcast]\n\n--- INDIVIDUAL VIEW (Customer Pricing) ---\nPayload: 18.36kg\nRoute:   [40.7392003, -73.97749] -> [40.7387447, -73.9785265]\nMetrics: 0.91km | 4.4min | Vehicle: bicycle\n\n--- OPERATIONAL VIEW (Fleet Execution) ---\nCLUSTER_ID:Cluster_1\nPayload: 42.03kg (ClusterTotal)\nRoute:   [40.74637, -74.0016392] -> [40.7390312, -73.9791055]\nMetrics: 0.0km | 0.0min | Vehicle: N/A\n\n",
+        "\n('[PricingAgent Success] ->best_route:Selected Route 0,final_price:20.190000534057617,weather_condition:Overcast,weather_factor:1.05', 'optimized_cost:0.0')\n",
+        "[CriticAgent]: Vehicle: bicycle -> e_scooter"
+    ],
+    "LOGIQ-2026-STRESS-116": [
+        "DocumentAgent",
+        "[DocumentAgent Success] extracted LOGIQ-2026-STRESS-116",
+        "\n[RouteAgent Success]\n--- ENVIRONMENT ---\nContext: [H:13, Day:5, Rush:0, Holiday:0]\nSignals: [Traffic:0.95, Weather:Overcast]\n\n--- INDIVIDUAL VIEW (Customer Pricing) ---\nPayload: 20.92kg\nRoute:   [40.74637, -74.0016392] -> [40.7358955, -74.1725529]\nMetrics: 22.14km | 36.41min | Vehicle: van\n\n--- OPERATIONAL VIEW (Fleet Execution) ---\nCLUSTER_ID:SINGLETON\nPayload: 20.92kg (ClusterTotal)\nRoute:   [40.74637, -74.0016392] -> [40.7358955, -74.1725529]\nMetrics: 0km | 0min | Vehicle: 0\n\n",
+        "\n('[PricingAgent Success] ->best_route:Selected Route 1,final_price:97.04000091552734,weather_condition:Overcast,weather_factor:1.05', 'optimized_cost:0.0')\n",
+        "[CriticAgent]: Verified - No Overrides."
+    ],
+    "LOGIQ-2026-STRESS-117": [
+        "DocumentAgent",
+        "Math Warning: LLM total (22.1) != calculated sum (23.10)",
+        "[DocumentAgent Success] extracted LOGIQ-2026-STRESS-117",
+        "\n[RouteAgent Success]\n--- ENVIRONMENT ---\nContext: [H:15, Day:5, Rush:0, Holiday:0]\nSignals: [Traffic:0.95, Weather:Overcast]\n\n--- INDIVIDUAL VIEW (Customer Pricing) ---\nPayload: 23.1kg\nRoute:   [40.74637, -74.0016392] -> [40.7358955, -74.1725529]\nMetrics: 22.14km | 36.41min | Vehicle: van\n\n--- OPERATIONAL VIEW (Fleet Execution) ---\nCLUSTER_ID:SINGLETON\nPayload: 23.1kg (ClusterTotal)\nRoute:   [40.74637, -74.0016392] -> [40.7358955, -74.1725529]\nMetrics: 0km | 0min | Vehicle: 0\n\n",
+        "\n('[PricingAgent Success] ->best_route:Selected Route 1,final_price:101.44999694824219,weather_condition:Overcast,weather_factor:1.05', 'optimized_cost:0.0')\n",
+        "[CriticAgent]: Verified - No Overrides."
+    ],
+    "LOGIQ-2026-STRESS-118": [
+        "DocumentAgent",
+        "[DocumentAgent Success] extracted LOGIQ-2026-STRESS-118",
+        "\n[RouteAgent Success]\n--- ENVIRONMENT ---\nContext: [H:17, Day:4, Rush:1, Holiday:0]\nSignals: [Traffic:0.95, Weather:Overcast]\n\n--- INDIVIDUAL VIEW (Customer Pricing) ---\nPayload: 3.51kg\nRoute:   [40.74637, -74.0016392] -> [40.7358955, -74.1725529]\nMetrics: 22.14km | 36.41min | Vehicle: van\n\n--- OPERATIONAL VIEW (Fleet Execution) ---\nCLUSTER_ID:SINGLETON\nPayload: 3.51kg (ClusterTotal)\nRoute:   [40.74637, -74.0016392] -> [40.7358955, -74.1725529]\nMetrics: 0km | 0min | Vehicle: 0\n\n",
+        "\n('[PricingAgent Success] ->best_route:Selected Route 1,final_price:92.83000183105469,weather_condition:Overcast,weather_factor:1.05', 'optimized_cost:0.0')\n",
+        "[CriticAgent]: Verified - No Overrides."
+    ],
+    "LOGIQ-2026-108": [
+        "DocumentAgent",
+        "[DocumentAgent Success] extracted LOGIQ-2026-108",
+        "\n[RouteAgent Success]\n--- ENVIRONMENT ---\nContext: [H:8, Day:5, Rush:1, Holiday:0]\nSignals: [Traffic:0.95, Weather:Overcast]\n\n--- INDIVIDUAL VIEW (Customer Pricing) ---\nPayload: 4.49kg\nRoute:   [40.7142542, -73.9526411] -> [40.720502, -73.9472156]\nMetrics: 0.94km | 3.53min | Vehicle: e_scooter\n\n--- OPERATIONAL VIEW (Fleet Execution) ---\nCLUSTER_ID:SINGLETON\nPayload: 4.49kg (ClusterTotal)\nRoute:   [40.7142542, -73.9526411] -> [40.720502, -73.9472156]\nMetrics: 0km | 0min | Vehicle: 0\n\n",
+        "\n('[PricingAgent Success] ->best_route:Selected Route 0,final_price:10.850000381469727,weather_condition:Overcast,weather_factor:1.05', 'optimized_cost:0.0')\n",
+        "[CriticAgent]: Verified - No Overrides."
+    ]
+}

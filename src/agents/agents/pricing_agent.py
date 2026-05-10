@@ -7,6 +7,7 @@ import mlflow.pyfunc
 import os
 import platform
 from src.utils.prediction_data_validator import DataValidationError, validate_columns,validate_dataype
+import time
 
 class PricingAgent(BaseAgent):
     def __init__(self):
@@ -24,45 +25,28 @@ class PricingAgent(BaseAgent):
         self.feature_cols=['passenger_count', 'pickup_longitude', 'pickup_latitude', 'dropoff_longitude', 'dropoff_latitude', 'total_weight_kg', 'distance_km', 'hour', 'day_of_week', 'is_holiday', 'duration_min', 'traffic_density_score', 'is_rush_hour', 'is_weekend', 'is_high_demand', 'type_bicycle', 'type_e_scooter', 'type_truck', 'type_van']
         
     def process(self, shipment: ShipmentModel) -> ShipmentModel:
+        start_time=time.time()
         best_price = float('inf')
         best_option = None
         for option in shipment.route_options:
-            shipment.distance_km= option['base_distance_km']
-            shipment.duration_min=option['adjusted_duration_min']
-            data_dict=shipment.model_dump(by_alias=True)
-            df=pd.DataFrame([data_dict])
+            current_dist= option['base_distance_km']
+            current_dur=option['adjusted_duration_min']
+            shipment.distance_km = current_dist
+            shipment.duration_min = current_dur
 
-            #validate all columns are present and data types are corrcet
-            is_valid_cols = validate_columns(df)
-            # Check if types are correct (converts strings to floats if needed)
-            is_valid_types = validate_dataype(df,)
-            if not is_valid_cols or not is_valid_types:
-                error_msg={
-                    f"Route index {option.get('route_index')} has invalid types or missing columns. "
-                    f"Required: {self.feature_cols}"
-                }
-                raise DataValidationError(error_msg)
-        
-            X = df[self.feature_cols]
-            print(f"DEBUG: Feature Vector -> {X.iloc[0].to_dict()}")
-            dmat=xgb.DMatrix(X)
-
-            #xgboost predicts base price
-            base_prediction=self.model.predict(dmat)[0]
-            actual_base_price = np.expm1(base_prediction)
-         
-            shipment.raw_model_prediction= round(float(actual_base_price),2)
+            # Predict
+            current_final_price = self._get_prediction(shipment)
+            print(f"current_final_price:{current_final_price}")
+ 
             surge_multiplier= self._calculate_market_surge(shipment)
     
-            current_final_price=round(actual_base_price*surge_multiplier,2)
-        
             shipment.weather_factor = surge_multiplier
 
-            if current_final_price <best_price:
-                best_price= current_final_price
+            if current_final_price < best_price:
+                best_price = current_final_price
                 best_option={
-                    "price": current_final_price,
-                    "base_price": round(actual_base_price, 2),
+                    "price": best_price,
+                    "predicted_base_price":current_final_price,
                     "distance": option['base_distance_km'],
                     "duration": option['adjusted_duration_min'],
                     "delta": option['delay_delta'],
@@ -70,26 +54,65 @@ class PricingAgent(BaseAgent):
                     "surge_multiplier":surge_multiplier
                 }
             
-        if best_option:
-            shipment.final_market_price = best_option['price']
-            shipment.predicted_base_price = best_option['base_price']
-            shipment.distance_km = best_option['distance']
-            shipment.duration_min = best_option['duration']
-            shipment.delay_delta = best_option['delta']
-            shipment.weather_factor = best_option['surge_multiplier']
-          
-                    
-            trace_entry=(
-                f"[{self.name} Success] ->"
-                f"best_route:Selected Route {best_option['index']},"
-                f"final_price:{shipment.final_market_price},"
-                f"weather_condition:{shipment.weather_condition},"
-                f"weather_factor:{shipment.weather_factor}"
-            )
+            if best_option:
+                shipment.final_market_price = best_option['price']
+                shipment.predicted_base_price = best_option['predicted_base_price']
+                shipment.distance_km = best_option['distance']
+                shipment.duration_min = best_option['duration']
+                shipment.delay_delta = best_option['delta']
+                shipment.weather_factor = best_option['surge_multiplier']
             
-            shipment.agent_trace.append(f"\n{trace_entry}\n")
+
+        #opertaional cost for comapny
+        if hasattr(shipment, 'operational_features') and shipment.operational_features:
+            # We create a temporary dataframe from the operational dictionary
+            op_df = pd.DataFrame([shipment.operational_features])
+            
+            # Use the same logic but on the operational data
+            op_dmat = xgb.DMatrix(op_df[self.feature_cols])
+            op_pred = self.model.predict(op_dmat)[0]
+            operational_cost = round(float(np.expm1(op_pred)), 2)
+            shipment.operational_cost=round(operational_cost * self._calculate_market_surge(shipment), 2)
+      
+            shipment.old_operational_cost=shipment.operational_cost
+        
+        else:
+            # For solo routes, cost = base price
+            shipment.operational_cost = 0.0
+        
+        
+        shipment.pricing_agent_latency = time.time() - start_time
+        selected_index = best_option["index"] if (best_option and "index" in best_option) else "N/A (Optimized)"
+        trace_entry=(
+            f"[{self.name} Success] ->"
+            f"best_route:Selected Route {selected_index},"
+            f"final_price:{shipment.final_market_price},"
+            f"weather_condition:{shipment.weather_condition},"
+            f"weather_factor:{shipment.weather_factor}",
+            f"optimized_cost:{shipment.old_operational_cost}"
+        )
+        
+        shipment.agent_trace.append(f"\n{trace_entry}\n")
        
         return shipment
+    
+    def _get_prediction(self, shipment: ShipmentModel) -> float:
+        """Helper to handle the XGBoost boilerplate"""
+        data_dict = shipment.model_dump(by_alias=True)
+        df = pd.DataFrame([data_dict])
+        
+        # Validation
+        if not (validate_columns(df) and validate_dataype(df)):
+            raise DataValidationError("Invalid features for pricing")
+            
+        X = df[self.feature_cols]
+        dmat = xgb.DMatrix(X)
+        prediction = self.model.predict(dmat)[0]
+        base_price = np.expm1(prediction)
+
+        shipment.raw_model_prediction= round(float(base_price),2)
+
+        return round(base_price * self._calculate_market_surge(shipment), 2)
 
     def _calculate_market_surge(self, shipment: ShipmentModel) -> float:
         """Determines the market multiplier based on environmental factors"""

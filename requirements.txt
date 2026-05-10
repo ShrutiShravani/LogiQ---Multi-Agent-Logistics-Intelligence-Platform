@@ -3,6 +3,8 @@ langchain
 langchain-openai
 langgraph
 langsmith
+pygeohash
+langgraph-checkpoint-postgres
 
 # Data Processing
 pandas
@@ -33,6 +35,7 @@ pillow
 holidays
 python-multipart
 pymupdf
+psycopg[binary,pool] 
 
 # API & Web
 fastapi
@@ -54,3 +57,5 @@ uuid
 pytest
 pytest-cov
 pytest-mock
+
+nemoguardrails

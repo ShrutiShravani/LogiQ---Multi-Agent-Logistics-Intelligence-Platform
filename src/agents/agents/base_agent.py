@@ -5,9 +5,11 @@ from src.models.data_models import ShipmentModel
 import os
 
 class BaseAgent:
-    def __init__(self, name: str):
+    def __init__(self, name: str,llm_client=None, fallback_client=None):
         self.name = name
         self.us_holidays = holidays.US(state='NY')
+        self.llm = llm_client 
+        self.fallback = fallback_client
         try:
             self.mapping_path = os.path.join("data", "transformed","traffic_mapping.json")
             # Match the exact path where your NYCFeatureEngineer saved the JSON
@@ -17,6 +19,17 @@ class BaseAgent:
             print(f"Warning: Traffic mapping not found for {self.name}. Using defaults.")
             self.traffic_memory = {}
     
+
+    async def call_llm_with_api_fallback(self,messages):
+        """THIS is where the method lives."""
+        try:
+            return await self.llm.invoke(messages)
+        except Exception as e:
+            print(f"!!! {self.name} Technical Failure. Switching to Fallback...")
+            if self.fallback:
+                return await self.fallback.ainvoke(messages)
+            raise e
+            
     def enrich_metadata(self, shipment: ShipmentModel):
         """
         Senior-Level Feature Engineering.
@@ -54,28 +67,28 @@ class BaseAgent:
         # Reset OHE fields to 0
         shipment.type_truck = shipment.type_van = shipment.type_bicycle = shipment.type_e_scooter = 0
         
-        w = shipment.total_weight_kg
-        d = shipment.distance_km  # Ensure Route Agent has filled this!
+        w = float(shipment.total_weight_kg)
+        d = float(shipment.distance_km)  # Ensure Route Agent has filled this!
+        print(f"weight:{w} ({type(w)}"), 
+        print(f"Dist={d} ({type(d)}")
 
         # EXACT MATCH TO TRAINING CONDITIONS:
-        if w > 150:
+        if w > 150.0:
             shipment.vehicle_type, shipment.type_truck = "truck", 1
-        elif w > 20:
+        elif w > 20.0 and d>15.0:
             shipment.vehicle_type, shipment.type_van = "van", 1
 
         # 2. LIGHT WEIGHTS (0 - 20kg) - Choose by Distance
-        elif w <= 20.0:
-            if d <= 3.0:
+        else:
+            if d <3.0:
                 shipment.vehicle_type, shipment.type_e_scooter = "e_scooter", 1
-            elif 3.0 < d <= 10.0: # This perfectly captures your 7.5km / 2.5kg case
+            elif 3.0<d<=15.0: # This perfectly captures your 7.5km / 2.5kg case
                 shipment.vehicle_type, shipment.type_bicycle = "bicycle", 1
+            
             else:
                 # Distance is > 10km, too far for a bike
                 shipment.vehicle_type, shipment.type_van = "van", 1
 
-        # 3. FINAL SAFETY FALLBACK
-        else:
-            shipment.vehicle_type, shipment.type_van = "van", 1
 
         return shipment
 
@@ -90,7 +103,8 @@ class BaseAgent:
         stats = self.traffic_memory.get(key, {})
         
         # Get score, default to 1.0 (Normal) if not found
-        score = stats.get("traffic_density_score",1.0)
+        score = stats.get("traffic_density_score",1.5)
+        print(f"score:{score}")
         
         shipment.traffic_density_score = round(float(score), 2)
         print(f"traffic_Density_score:{shipment.traffic_density_score}")

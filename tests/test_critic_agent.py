@@ -97,3 +97,4 @@ def test_critic_corrects_insane_pricing(critic_agent):
     assert result.predicted_base_price == 12.5 
     assert result.is_verified is True
     assert "Price: $1.0 -> $12.5" in "".join(result.agent_trace)
+

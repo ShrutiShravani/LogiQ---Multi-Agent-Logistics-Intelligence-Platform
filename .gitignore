@@ -19,10 +19,6 @@ mlruns/
 mlflow.db
 logs/
 
-# Generated results
-batch_results.json
-batch_full_audit.json
-metrics.json
 
 # --- DATA & MODELS ---
 # 1. Ignore the entire data folder contents
@@ -49,7 +45,6 @@ __pycache__/
 Thumbs.db
 
 # --- MEDIA & TEMP ---
-*.png
 *.jpg
 *.jpeg
 *.plt
