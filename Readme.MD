@@ -1,32 +1,29 @@
-🚚 LogiQ — Multi-Agent Logistics Intelligence Platform
+# 🚚 LogiQ — Multi-Agent Logistics Intelligence Platform
 
-LogiQ is a production-grade multi-agent AI system designed to automate logistics workflows — from document ingestion → route mapping → pricing → validation.
+**LogiQ** is a production-grade multi-agent AI system designed to automate complex logistics workflows—from document ingestion and route mapping to weather-adjusted pricing and forensic validation.
 
-It enables accurate, reliable, and cost-efficient decision-making in real-world logistics operations.
+It enables accurate, reliable, and cost-efficient decision-making by replacing manual validation with a state-aware agentic architecture.
 
+---
 
-❓ Why LogiQ?
+## ❓ Why LogiQ?
 
+Traditional logistics systems often struggle with operational inefficiencies that lead to significant revenue leakage:
 
-Traditional logistics systems:
+*   **Manual Dependency:** High reliance on manual data entry and human validation.
+*   **Operational Errors:** Frequent inaccuracies in weight calculation, route selection, and cost estimation.
+*   **Static Logic:** A lack of real-time intelligence to account for external variables like weather or traffic.
 
+---
 
-- rely on manual validation
+## ✅ The Solution
 
-- are error-prone (incorrect weight, route, cost)
+LogiQ solves these challenges by utilizing a robust, production-ready AI stack:
 
-- lack real-time intelligence
-
-
-✅ LogiQ solves this using:
-
-- multi-agent orchestration
-
-- retrieval-augmented decision pipelines
-
-- trust & safety validation layers
-
-- cost-aware system design
+*   **Multi-Agent Orchestration:** Specialized agents (Router, Pricer, Auditor) working in a directed graph to handle discrete logistics tasks.
+*   **Retrieval-Augmented Decision Pipelines:** Utilizing RAG to extract and verify waybill data against historical and real-time records.
+*   **Trust & Safety Validation Layers:** Automated quality gates to ensure pricing integrity and document accuracy.
+*   **Cost-Aware System Design:** Optimized to run efficiently on standard hardware (32GB RAM) while maintaining high-concurrency performance.
 
 
 
