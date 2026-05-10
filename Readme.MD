@@ -6,7 +6,7 @@
 > **Workflow:** Document Ingestion → Extraction → Validation → Route Mapping → Pricing → Critic.
 
 
-## ❓ Why LogiQ?
+### ❓ Why LogiQ?
 
 Traditional logistics systems are often fragmented, relying on legacy software that is:
 
@@ -14,9 +14,9 @@ Traditional logistics systems are often fragmented, relying on legacy software t
 - **Error-Prone:** Frequent mistakes in weight calculation, route distance, and final costing.
 - **Stale Intelligence:** Lack of real-time adaptation to traffic, demand, or clustering opportunities.
 
----
 
-## ✅ The Solution
+
+### ✅ The Solution
 
 LogiQ solves these challenges using a high-trust, **agentic architecture**:
 
@@ -210,8 +210,7 @@ LogiQ utilizes a "Glass Box" design, ensuring every agentic decision is logged a
 
 | LangGraph Execution Trace | MLflow Performance Logs |
 | :---: | :---: |
-| ![LangGraph Trace](assets\trcae_Document_extrcation_to_validation.png) | ![MLflow Metrics](assets\mlflow_log1.png),
-![MLflow Metrics](assets\mlflow_log1.png),![MLflow Metrics](assets\mlflow_log3.png)|
+| ![LangGraph Trace](assets\trace_document_extraction_to_validation.png) | ![MLflow Metrics](assets\mlflow_log1.png),(assets\mlflow_log2.png),(assets\mlflow_log3.png)|
 
 *   **Traceability:** Every node transition and state change is captured for forensic debugging.
 *   **Performance Tracking:** MLflow monitors MAE, override rates, and batch efficiency in real-time.
@@ -301,7 +300,7 @@ Follow these steps to deploy the LogiQ stack locally.
 
 **Create a `.env` file in the root directory and configure the following variables:**
 
-# LLM & Tracing
+### LLM & Tracing
 
 OPENAI_API_KEY=your_key
 
@@ -311,7 +310,7 @@ LANGCHAIN_PROJECT="LogiQ-Intelligence-Platform"
 
 LANGCHAIN_TRACING_V2="true"
 
-# External APIs
+### External APIs
 
 MAPBOX_ACCESS_TOKEN=your_mapbox_token
 
@@ -321,7 +320,7 @@ VISUAL_CROSSING_KEY=your_weather_key
 APP_USER_AGENT=LogiQ_Senior_Project_V2
 
 
-# Databases (Docker Internal)
+### Databases (Docker Internal)
 
 
 POSTGRES_USER=logiq_user
@@ -339,7 +338,7 @@ REDIS_HOST=redis
 REDIS_PORT=6379
 
 
-# Observability
+### Observability
 
 MLFLOW_TRACKING_URI=[http://mlflow_server:5000](http://mlflow_server:5000)
 
@@ -355,10 +354,9 @@ MLFLOW_EXPERIMENT_NAME=Logistics_Pricing_Live
 
 **Clone the repository**
 
-git clone [https://github.com/yourusername/logiq-agent-ops.git](https://github.com/yourusername/logiq-agent-ops.git)  
-cd logiq-agent-ops
+git clone [https://github.com/ShrutiShravani/LogiQ-Multi-Agent-Logistics-Intelligence] (https://github.com/ShrutiShravani/LogiQ-Multi-Agent-Logistics-Intelligence)
 
-
+cd LogiQ-MultiAgentLogisticsIntelligencePlatform
 
 **Run pip install -r requirements.txt**
 
