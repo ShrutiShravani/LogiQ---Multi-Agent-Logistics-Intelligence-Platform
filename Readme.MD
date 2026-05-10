@@ -42,6 +42,10 @@ Built-in clustering logic to identify shipment grouping opportunities, maximizin
 
 LogiQ is engineered as a **Stateful Directed Acyclic Graph (DAG)** leveraging **LangGraph**. By moving away from brittle linear pipelines, the architecture utilizes independent, state-sharing nodes that operate as specialized micro-services.
 
+<p align="center">
+  <img src="./assets/logit.png" width="1100"/>
+</p>
+
 ### **1. Multi-Agent Orchestration & Agentic Ops**
 
 This is the core execution engine, built on **LangGraph** and monitored via a comprehensive Observability Stack.
