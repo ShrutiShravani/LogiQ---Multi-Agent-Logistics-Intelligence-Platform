@@ -200,8 +200,8 @@ LogiQ utilizes a dual-engine approach (**XGBoost + Critic Agent**) to maintain f
 ### 4. 📂 Technical Deep Dive: Raw Audit Data
 For a granular look at the system's output and decision-making logic, refer to the generated audit logs:
 
-*   [View Full Shipment Audit (JSON)](assets\batch_full_audit.json) — *Shows the complete state transition from raw OCR to final price.*
-*   [View Validation Feedback Loop (JSON)](assets\batch_results.json) — *Demonstrates the recursive logic when the Validation Agent triggers a re-extraction.*
+*   [View Full Shipment Audit (JSON)](./assets/batch_full_audit.json) — *Shows the complete state transition from raw OCR to final price.*
+*   [View Validation Feedback Loop (JSON)](./assets/batch_results.json) — *Demonstrates the recursive logic when the Validation Agent triggers a re-extraction.*
 
 > **Pro Tip:** These JSON files represent the "Final State" of the LangGraph, containing all telemetry, API responses, and Critic overrides.
 
@@ -210,7 +210,14 @@ LogiQ utilizes a "Glass Box" design, ensuring every agentic decision is logged a
 
 | LangGraph Execution Trace | MLflow Performance Logs |
 | :---: | :---: |
-| ![LangGraph Trace](assets\trace_document_extraction_to_validation.png) | ![MLflow Metrics](assets\mlflow_log1.png),(assets\mlflow_log2.png),(assets\mlflow_log3.png)|
+
+| ![LangGraph Trace](./assets/trace_document_extraction_to_validation.png) 
+
+| ![MLflow Metrics](./assets/mlflow_log1.png)
+
+|![MLflow Metrics](./assets/mlflow_log2.png)
+
+| ![MLflow Metrics](./assets/mlflow_log3.png)
 
 *   **Traceability:** Every node transition and state change is captured for forensic debugging.
 *   **Performance Tracking:** MLflow monitors MAE, override rates, and batch efficiency in real-time.
@@ -267,7 +274,7 @@ Building a production-ready logistics engine required solving complex bottleneck
 | **Metric**                   | **Pre-Optimization** | **Post-Optimization** | **Improvement**     |
 | **Data Extraction Accuracy** | ~75%                 | **98.2%**             | **+23%**            |
 | **Clustering Savings**       | $0.00                | **$22.00 / batch**    | **New Capability**  |
-| **Extraction Latency (p99)** | >15s                 | **6.87s**             | **54% Reduction**   |
+| **Route agent Latency (p99)** | >15s                 | **6.87s**             | **54% Reduction after cache**   |
 | **Verification Rate**        | Manual               | **100% (Automated)**  | **100% Efficiency** |
 
 
