@@ -200,18 +200,37 @@ LogiQ utilizes a dual-engine approach (**XGBoost + Critic Agent**) to maintain f
 ### 4. 📂 Technical Deep Dive: Raw Audit Data
 For a granular look at the system's output and decision-making logic, refer to the generated audit logs:
 
-*   [View Full Shipment Audit (JSON)](./assets/batch_full_audit.json) — *Shows the complete state transition from raw OCR to final price.*
-*   [View Validation Feedback Loop (JSON)](./assets/batch_results.json) — *Demonstrates the recursive logic when the Validation Agent triggers a re-extraction.*
+### **1. Comprehensive Agent Trace (Full Lifecycle)**
+* **Artifact:** [`batch_full_audit.json`](./assets/batch_full_audit.json)
+* **Description:** A complete state-transition log showing the hand-off between specialized agents.
+* **Key Insights:** * **Agent Flow:** Visualizes the trajectory from **Raw OCR Extraction** → **Route Optimization** → **Dynamic Pricing** → **Critic Validation**.
+    * **Critic Feedback:** Includes logs of the Critic Agent identifying and overriding price anomalies.
+
+### **2. Detailed Shipment Audit (Metadata & Metrics)**
+* **Artifact:** [`batch_results.json`](./assets/batch_results.json)
+* **Description:** A deep-dive into the Pydantic-validated telemetry for individual shipments.
+* **Technical Highlights:**
+    * **LLM Performance:** Tracks `doc_latency`, `doc_ttft` (Time to First Token), and `llm_cost_usd` per shipment.
+    * **Forensic Scoring:** Captures `anomaly_score`, `is_verified`, and `theoretical_price` vs. `final_market_price`.
+    * **Logistics Intelligence:** Displays real-time features used for pricing, including `traffic_density_score` (e.g., 0.95), `weather_condition`, and `eta_minutes`.
 
 > **Pro Tip:** These JSON files represent the "Final State" of the LangGraph, containing all telemetry, API responses, and Critic overrides.
 
 ### 5. 🔍 Full-Stack Traceability & Audit Trail
 LogiQ utilizes a "Glass Box" design, ensuring every agentic decision is logged and auditable.
 
-| LangGraph Execution Trace | MLflow Performance Logs |
+
+*   **Traceability:** Every node transition and state change is captured for forensic debugging.
+
+| LangGraph Execution Trace | 
 | :---: | :---: |
 
 | ![LangGraph Trace](./assets/trace_document_extraction_to_validation.png) 
+
+*   **Performance Tracking:** MLflow monitors MAE, override rates, and batch efficiency in real-time.
+
+
+| MLflow Performance Logs |
 
 | ![MLflow Metrics](./assets/mlflow_log1.png)
 
@@ -219,8 +238,6 @@ LogiQ utilizes a "Glass Box" design, ensuring every agentic decision is logged a
 
 | ![MLflow Metrics](./assets/mlflow_log3.png)
 
-*   **Traceability:** Every node transition and state change is captured for forensic debugging.
-*   **Performance Tracking:** MLflow monitors MAE, override rates, and batch efficiency in real-time.
 
 ---
 
