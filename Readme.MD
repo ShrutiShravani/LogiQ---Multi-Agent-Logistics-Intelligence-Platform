@@ -223,20 +223,20 @@ LogiQ utilizes a "Glass Box" design, ensuring every agentic decision is logged a
 *   **Traceability:** Every node transition and state change is captured for forensic debugging.
 
 | LangGraph Execution Trace | 
-| :---: | :---: |
 
-| ![LangGraph Trace](./assets/trace_document_extraction_to_validation.png) 
+
+![LangGraph Trace](./assets/trace_document_extraction_to_validation.png) 
 
 *   **Performance Tracking:** MLflow monitors MAE, override rates, and batch efficiency in real-time.
 
 
 | MLflow Performance Logs |
 
-| ![MLflow Metrics](./assets/mlflow_log1.png)
+![MLflow Metrics](./assets/mlflow_log1.png)
 
-|![MLflow Metrics](./assets/mlflow_log2.png)
+![MLflow Metrics](./assets/mlflow_log2.png)
 
-| ![MLflow Metrics](./assets/mlflow_log3.png)
+![MLflow Metrics](./assets/mlflow_log3.png)
 
 
 ---
