@@ -305,13 +305,27 @@ Building a production-ready logistics engine required solving complex bottleneck
 
 ### ⛽ Advanced Feature Imputation:
 
-### The Fuel-Weight Heuristic
+### CURRENT OPTIMIZATION SPRINT
 
-- **Problem:** The raw delivery dataset lacked granular fuel telemetry, a critical feature for high-fidelity pricing. 
-- **Aim:** Increase pricing precision by **12%**
-- **Solution:** Wokring on Engineering a **Fuel Estimator Agent** that calculates the **Load Factor** (Actual Weight vs. Max Vehicle Capacity). 
-- **The Heuristic:** Physics-informed calculation to impute fuel consumption based on shipment mass and route elevation data. 
-- **Impact:** This allows the **Pricing Agent** to accurately account for the "true" operational cost of heavy-load hauls vs. light-load deliveries
+#### 1. Advanced Fuel-Weight Imputation
+* Engineering a **Fuel Estimator Agent** to calculate Load Factor and physics-informed fuel consumption.
+* Enables the Pricing Agent to account for the true operational cost of heavy-load vs. light-load hauls.
+
+#### 2. Autonomous Data Imputation
+* Implementing an agentic verification node to identify and rectify missing or corrupted waybill metadata.
+* Leverages historical data and external APIs to autonomously fill data gaps before routing execution.
+
+#### 3. Infrastructure Memory (Predictive Rerouting)
+* Integrating a persistent memory layer to store and analyze historical **Route Post-Mortems**.
+* Preemptively adjusts routes based on recurring temporal and spatial failure patterns to avoid delays.
+
+#### 4. Multi-Agent Constraint Negotiation
+* Architecting a **LangGraph debate loop** between Profit and SLA focused agents.
+* Generates compromise routes based on transparent, auditable business trade-offs.
+
+#### 5. Dynamic Rerouter (Real-Time Execution)
+* Developing a reactive loop that monitors live disruptions like traffic spikes or vehicle breakdowns.
+* Autonomously triggers re-planning cycles to update active manifests without manual intervention.
 
 ---
 
